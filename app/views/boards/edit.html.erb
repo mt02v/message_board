@@ -1,8 +1,11 @@
-<%= link_to @board.title, "/boards/#{@board.id}" %>
+<%= link_to @board.title, board_path(@board) %>
 <hr>
+<% if @board.errors.any? %>
+  <%= @board.errors.full_messages %>
+<% end %>
 <h1>Boards#edit</h1>
-<%= form_tag "/boards/#{@board.id}", method: :put do %>
-  タイトル: <%= text_field_tag :title, @board.title %><br>
-  作成者: <%= text_field_tag :editor,@board.editor %><br>
+<%= form_for @board do |f| %>
+  タイトル: <%= f.text_field :title %><br>
+  作成者: <%= f.text_field :editor %><br>
  <%= submit_tag %>
 <% end %>
